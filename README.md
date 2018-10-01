@@ -6,7 +6,7 @@ Shell for CocoaPods pod repo push
 # a shell used for CocoaPods pod repo push
 #warnings:
 #         (1) my repo name in local is BPSpecs,
-#             you should change the key word to your own repo name
+#             you should change the key word to your own repo name in shell
 #
 # How to use：
 #         (1) get clone this repository
