@@ -25,8 +25,7 @@ echo "run cd"
 cd $1
 echo "pwd resut:"
 pwd
-# podspecFile=`find ./ -name '*podspec'`
-# echo "podspecFile path:$podspecFile"
-
+echo "git pull"
+git pull
 echo "pod repo push --skip-import-validation start:"
 pod repo push BPSpecs --sources='http://gitlab.bitautotech.com/WP/Mobile/IOS/Specs.git,https://github.com/CocoaPods/Specs.git' --allow-warnings --use-libraries  --skip-import-validation
