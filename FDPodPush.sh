@@ -23,8 +23,6 @@ echo "run cd"
 cd $1
 echo "pwd resut:"
 pwd
-podspecFile=`find ./ -name '*podspec'`
-echo "podspecFile path:$podspecFile"
 
-echo "pod pod repo push  start:"
-pod repo push $BPSpecs $podspecFile --sources='http://gitlab.bitautotech.com/WP/Mobile/IOS/Specs.git,https://github.com/CocoaPods/Specs.git' --allow-warnings --use-libraries
+echo "pod repo push  start:"
+pod repo push BPSpecs  --sources='http://gitlab.bitautotech.com/WP/Mobile/IOS/Specs.git,https://github.com/CocoaPods/Specs.git' --allow-warnings --use-libraries
