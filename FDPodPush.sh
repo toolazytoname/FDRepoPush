@@ -26,4 +26,4 @@ pwd
 echo "git pull"
 git pull
 echo "pod repo push  start:"
-pod repo push BPSpecs  --sources='http://gitlab.bitautotech.com/WP/Mobile/IOS/Specs.git,https://github.com/CocoaPods/Specs.git' --allow-warnings --use-libraries
+pod repo push BPSpecs  --sources='http://gitlab.bitautotech.com/WP/Mobile/IOS/Specs.git' --allow-warnings --use-libraries
