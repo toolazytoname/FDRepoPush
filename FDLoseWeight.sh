@@ -1,5 +1,4 @@
 #! /bin/sh
-
 #--------------------------------------------
 # a shell used for CocoaPods pod lib lint
 #
@@ -7,6 +6,7 @@
 #         (1) get clone this repository
 #         (2) chmod +x FD***.sh
 #         (3) ./FDLoseWeight.sh  /Users/yiche/Code/test/WelfareMirror（库的根目录） Example/Pods/（想删除的文件夹） http://gitlab.bitautotech.com/weichao/WelfareThin（新目录地址）
+#         (3) ./FDLoseWeight.sh  /Users/yiche/Code/test/WelfareMirror（库的根目录） Example/Pods/,Example2（想删除的文件夹数组） http://gitlab.bitautotech.com/weichao/WelfareThin（新目录地址）
 #  最理想状态是直接在当前remote操作，但是操作了以后文件是删了，没瘦下来，所以退而求其次，推了个新库。
 #
 #
@@ -14,6 +14,12 @@
 #  如果要改原来的，在这里把分支保护给关掉http://gitlab.bitautotech.com/weichao/WelfareMirror/settings/repository  点击unprotect，记得完事后重新保护上
 # ./FDLoseWeight.sh  /Users/yiche/Code/test/WelfareMirror Example/Pods/ http://gitlab.bitautotech.com/weichao/WelfareThin
 # ./FDLoseWeight.sh  /Users/yiche/Code/test/WelfareMirror Example/ http://gitlab.bitautotech.com/weichao/WelfareThin
+#
+# 可以通过如下命令找到大文件
+#https://www.cnblogs.com/lout/p/6111739.html
+# git verify-pack -v .git/objects/pack/pack-*.idx | sort -k 3 -g | tail -5
+# git rev-list --objects --all | grep 8f10eff91bb6aa2de1f5d096ee2e1687b0eab007
+#
 #--------------------------------------------
 
 
@@ -35,8 +41,7 @@ if [ ! -n "$3" ] ;then
     echo "You have not input a  thin repo. "
 else
     echo "The  thin remote remote is $3"
-    # Example/Pods/
-    # Example/
+    # http://gitlab.bitautotech.com/weichao/WelfareThin
 fi
 
 
@@ -53,7 +58,15 @@ echo "开始瘦身:"
 
 git pull --all
 # 清除文件
-git filter-branch --force --index-filter "git rm -r --ignore-unmatch --cached $2" --prune-empty --tag-name-filter cat -- --all
+# git filter-branch --force --index-filter "git rm -r --ignore-unmatch --cached $2" --prune-empty --tag-name-filter cat -- --all
+oldIFS=$IFS
+IFS=,
+directory_to_remove_array=($2)
+IFS=$oldIFS
+for directory_name in ${directory_to_remove_array[@]}; do
+  git filter-branch --force --index-filter "git rm -r --ignore-unmatch --cached $directory_name" --prune-empty --tag-name-filter cat -- --all
+done
+
 # 如果文件很多，在下面补充
 # git filter-branch --force --index-filter 'git rm -r --cached --ignore-unmatch Example' --prune-empty --tag-name-filter cat -- --all
 
