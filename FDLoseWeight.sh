@@ -1,6 +1,6 @@
 #! /bin/sh
 #--------------------------------------------
-# a shell used for CocoaPods pod lib lint
+# a shell used for  pod lose weight
 #
 # How to use：
 #         (1) get clone this repository
