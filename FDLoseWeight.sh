@@ -60,14 +60,22 @@ git filter-branch --force --index-filter "git rm -r --ignore-unmatch --cached $2
 
 #Whenever you clone a repo, you do not clone all of its branches by default.
 #If you wish to do so, use the following script:
-for branch in `git branch -a | grep remotes | grep -v HEAD | grep -v master `; do
+for branch in `git branch -a | grep remotes/origin | grep -v HEAD | grep -v master `; do
    git branch --track ${branch#remotes/origin/} $branch
 done
+
+# remotes/origin/RMLogin
+# remotes/origin/develop
+# remotes/origin/flutter
+# remotes/origin/navigation
+# for branch in  `git branch -r | grep -v 'HEAD\|master'`; do
+#  git branch --track ${branch##*/} $branch;
+# done
+# git branch --track experimental origin/experimental
 
 # 虽然上面我们已经删除了文件, 但是我们的repo里面仍然保留了这些objects, 等待垃圾回收(GC), 所以我们要用命令彻底清除它, 并收回空间.
 rm -rf .git/refs/original/
 git reflog expire --expire=now --all
-git gc --prune=now
 git gc --aggressive --prune=now
 
 # 推送我们修改后的repo
