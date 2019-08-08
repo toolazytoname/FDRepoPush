@@ -5,23 +5,17 @@
 # How to use：
 #         (1) get clone this repository
 #         (2) chmod +x FD***.sh
-#         (3) 想删除单个目录，记得斜杠结尾
+#         (3) 在GitLab上新建一个repo，例如 http://gitlab.bitautotech.com/weichao/WelfareThin
+#         (4) 想删除单个目录，记得斜杠结尾
 #              ./FDLoseWeight.sh  /Users/yiche/Code/test/WelfareMirror（库的根目录） Example/Pods/（想删除的文件夹） http://gitlab.bitautotech.com/weichao/WelfareThin（新目录地址）
-#         (4) 想删除多个目录，每个目录斜杠结尾 ，用逗号隔开
+#         (5) 想删除多个目录，每个目录斜杠结尾 ，用逗号隔开
 #             ./FDLoseWeight.sh  /Users/yiche/Code/test/WelfareMirror（库的根目录） Example/Pods/,Example2（想删除的文件夹数组） http://gitlab.bitautotech.com/weichao/WelfareThin（新目录地址）
 #  最理想状态是直接在当前remote操作，但是操作了以后文件是删了，没瘦下来，所以退而求其次，推了个新库。
-#
-#
-#
 #  如果要改原来的，在这里把分支保护给关掉http://gitlab.bitautotech.com/weichao/WelfareMirror/settings/repository  点击unprotect，记得完事后重新保护上
-#
-#
-#
-# 可以通过如下命令找到大文件
-# https://www.cnblogs.com/lout/p/6111739.html
-# git verify-pack -v .git/objects/pack/pack-*.idx | sort -k 3 -g | tail -5
-# git rev-list --objects --all | grep 8f10eff91bb6aa2de1f5d096ee2e1687b0eab007
-#
+#  可以通过如下命令找到大文件
+#  https://www.cnblogs.com/lout/p/6111739.html
+#  git verify-pack -v .git/objects/pack/pack-*.idx | sort -k 3 -g | tail -5
+#  git rev-list --objects --all | grep 8f10eff91bb6aa2de1f5d096ee2e1687b0eab007
 #--------------------------------------------
 
 
@@ -72,14 +66,10 @@ done
 #If you wish to do so, use the following script:
 for branch in `git branch -a | grep remotes/origin | grep -v HEAD | grep -v master `; do
    git branch --track ${branch#remotes/origin/} $branch
-   # echo "log: git branch --track ${branch#remotes/origin/} $branch"
+   # https://www.cnblogs.com/sherlockhomles/p/3837113.html
    # log: git branch --track RMLogin remotes/origin/RMLogin
 done
 # https://stackoverflow.com/questions/67699/how-to-clone-all-remote-branches-in-git
-# remotes/origin/RMLogin
-# remotes/origin/develop
-# remotes/origin/flutter
-# remotes/origin/navigation
 # for branch in  `git branch -r | grep -v 'HEAD\|master'`; do
 #  git branch --track ${branch##*/} $branch;
 # done
