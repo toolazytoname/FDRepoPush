@@ -1,10 +1,21 @@
-#!/bin/bash
-# http://gitlab.bitautotech.com/WP/Mobile/IOS/BPWelfareLib
-# http://gitlab.bitautotech.com/weichao/WelfareMirror
-# http://gitlab.bitautotech.com/weichao/WelfareThin
-# 在这里把分支保护给关掉http://gitlab.bitautotech.com/weichao/WelfareMirror/settings/repository  点击unprotect，记得完事后重新保护上
+#! /bin/sh
+
+#--------------------------------------------
+# a shell used for CocoaPods pod lib lint
+#
+# How to use：
+#         (1) get clone this repository
+#         (2) chmod +x FD***.sh
+#         (3) ./FDLoseWeight.sh  /Users/yiche/Code/test/WelfareMirror（库的根目录） Example/Pods/（想删除的文件夹） http://gitlab.bitautotech.com/weichao/WelfareThin（新目录地址）
+#  最理想状态是直接在当前remote操作，但是操作了以后文件是删了，没瘦下来，所以退而求其次，推了个新库。
+#
+#
+#
+#  如果要改原来的，在这里把分支保护给关掉http://gitlab.bitautotech.com/weichao/WelfareMirror/settings/repository  点击unprotect，记得完事后重新保护上
 # ./FDLoseWeight.sh  /Users/yiche/Code/test/WelfareMirror Example/Pods/ http://gitlab.bitautotech.com/weichao/WelfareThin
 # ./FDLoseWeight.sh  /Users/yiche/Code/test/WelfareMirror Example/ http://gitlab.bitautotech.com/weichao/WelfareThin
+#--------------------------------------------
+
 
 if [ ! -n "$1" ] ;then
     echo "You have not input a folder path that is git root. "
@@ -35,8 +46,7 @@ echo "pwd resut:"
 pwd
 echo "开始瘦身:"
 
-# 先把设置里的分支保护给关掉
-
+#  .gitignore 自己手动加吧
 # echo "Example/Pods/" >> .gitignore
 # git add .gitignore
 # git commit -m "Add Example/Pods/ to .gitignore"
