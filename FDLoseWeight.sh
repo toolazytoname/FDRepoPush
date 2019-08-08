@@ -64,9 +64,9 @@ oldIFS=$IFS
 IFS=,
 directory_to_remove_array=($2)
 IFS=$oldIFS
-# for directory_name in ${directory_to_remove_array[@]}; do
-  # git filter-branch --force --index-filter "git rm -r --ignore-unmatch --cached $directory_name" --prune-empty --tag-name-filter cat -- --all
-# done
+for directory_name in ${directory_to_remove_array[@]}; do
+  git filter-branch --force --index-filter "git rm -r --ignore-unmatch --cached $directory_name" --prune-empty --tag-name-filter cat -- --all
+done
 
 #Whenever you clone a repo, you do not clone all of its branches by default.
 #If you wish to do so, use the following script:
@@ -75,7 +75,7 @@ for branch in `git branch -a | grep remotes/origin | grep -v HEAD | grep -v mast
    # echo "log: git branch --track ${branch#remotes/origin/} $branch"
    # log: git branch --track RMLogin remotes/origin/RMLogin
 done
-
+# https://stackoverflow.com/questions/67699/how-to-clone-all-remote-branches-in-git
 # remotes/origin/RMLogin
 # remotes/origin/develop
 # remotes/origin/flutter
