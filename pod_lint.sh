@@ -20,4 +20,4 @@ cd $1
 echo "pwd resut:"
 pwd
 echo "pod lib lint start:"
-pod lib lint --sources='http://gitlab.bitautotech.com/WP/Mobile/IOS/Specs.git,https://github.com/CocoaPods/Specs.git' --allow-warnings --use-libraries --fail-fast
+pod lib lint --sources='http://gitlab.bitautotech.com/WP/Mobile/IOS/Specs.git,https://github.com/CocoaPods/Specs.git' --allow-warnings --use-libraries --fail-fast --verbose
